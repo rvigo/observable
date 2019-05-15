@@ -16,12 +16,20 @@ public class Main {
 		String secondState = "second state";
 
 		Subject sub = new Subject(firstState);
-		new NameObserver(sub);
-		new ReverseNameObserver(sub);
+		NameObserver nameObserver = new NameObserver(sub);
+		ReverseNameObserver reverseObserver = new ReverseNameObserver(sub);
 		sub.notifyObservers();
 
 		sub.setState(secondState);
 
-	}
+		sub.removeObserver(reverseObserver);
+		System.out.println("reverseObserver removed");
 
+		sub.notifyObservers();
+
+		sub.removeObserver(nameObserver);
+		System.out.println("nameObserver removed");
+
+		sub.notifyObservers();
+	}
 }
